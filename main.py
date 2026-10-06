@@ -1,5 +1,5 @@
-from produto import Produto
-from venda import Venda
+from models.produto import Produto
+from models.venda import Venda
 
 
 # ==============================
@@ -42,13 +42,11 @@ venda1 = Venda(
 
 
 # ==============================
-# ADICIONANDO PRODUTOSx
+# ADICIONANDO PRODUTOS
 # ==============================
 
 venda1.adicionarItem(produto1, 2)
-
 venda1.adicionarItem(produto2, 1)
-
 venda1.adicionarItem(produto3, 1)
 
 
@@ -64,18 +62,6 @@ venda1.exibirComprovante()
 # ==============================
 
 print("\n========== ESTOQUE ==========")
-
-print(
-    f"{produto1.nome}: "
-    f"{produto1.verificarEstoque()}"
-)
-
-print(
-    f"{produto2.nome}: "
-    f"{produto2.verificarEstoque()}"
-)
-
-print(
-    f"{produto3.nome}: "
-    f"{produto3.verificarEstoque()}"
-)
+print(f"{produto1.nome}: {produto1.verificarEstoque()}")
+print(f"{produto2.nome}: {produto2.verificarEstoque()}")
+print(f"{produto3.nome}: {produto3.verificarEstoque()}")
