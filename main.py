@@ -1,15 +1,17 @@
-from models.produto import Produto
-from models.venda import Venda
+from produto import Produto
+from venda import Venda
+from datetime import datetime
+from Pagamento_debito import PagamentoDebito
+from Pagamento_Pix import PagamentoPix
+from Pagamento_Dinheiro import PagamentoDinheiro
+from Pagamento_Cartao import PagamentoCartao
 
-
-# ==============================
-# CRIANDO OS PRODUTOS
-# ==============================
+# OS PRODUTOS
 
 produto1 = Produto(
     1,
     "Mouse",
-    80.00,
+    100.00,
     "Mouse Gamer",
     10
 )
@@ -17,51 +19,95 @@ produto1 = Produto(
 produto2 = Produto(
     2,
     "Teclado",
-    150.00,
+    180.00,
     "Teclado Mecânico",
-    5
+    7
 )
 
 produto3 = Produto(
     3,
     "Monitor",
-    900.00,
+    1000.00,
     "Monitor 24 polegadas",
-    3
+    4
 )
 
 
-# ==============================
-# CRIANDO A VENDA
-# ==============================
+# VENDA 1 - PIX (desconto de 5%)
 
 venda1 = Venda(
     1,
-    "04/10/2026"
+    datetime.now(),
+    PagamentoPix()
 )
 
+venda1.adicionar_item(produto1, 2)
+venda1.adicionar_item(produto2, 1)
+venda1.adicionar_item(produto3, 1)
 
-# ==============================
-# ADICIONANDO PRODUTOS
-# ==============================
+if venda1.remover_item(produto2):
+    print("Teclado removido da venda!")
+else:
+    print("Produto não encontrado na venda.")
 
-venda1.adicionarItem(produto1, 2)
-venda1.adicionarItem(produto2, 1)
-venda1.adicionarItem(produto3, 1)
-
-
-# ==============================
-# EXIBINDO O COMPROVANTE
-# ==============================
-
-venda1.exibirComprovante()
+venda1.finalizar_venda()
 
 
-# ==============================
-# MOSTRANDO O ESTOQUE
-# ==============================
+# VENDA 2 - DINHEIRO (desconto de 3%)
+
+venda2 = Venda(
+    2,
+    datetime.now(),
+    PagamentoDinheiro()
+)
+
+venda2.adicionar_item(produto1, 1)
+venda2.adicionar_item(produto2, 1)
+
+venda2.finalizar_venda()
+
+
+# VENDA 3 - CARTÃO (acréscimo de 5%)
+
+venda3 = Venda(
+    3,
+    datetime.now(),
+    PagamentoCartao()
+)
+
+venda3.adicionar_item(produto3, 1)
+
+venda3.finalizar_venda()
+
+
+# VENDA 4 - DÉBITO (sem alteração)
+
+venda4 = Venda(
+    4,
+    datetime.now(),
+    PagamentoDebito()
+)
+
+venda4.adicionar_item(produto1, 1)
+
+venda4.finalizar_venda()
+
+
+# VISUALIZAR O ESTOQUE
 
 print("\n========== ESTOQUE ==========")
-print(f"{produto1.nome}: {produto1.verificarEstoque()}")
-print(f"{produto2.nome}: {produto2.verificarEstoque()}")
-print(f"{produto3.nome}: {produto3.verificarEstoque()}")
+
+print(
+    f"{produto1.nome}: "
+    f"{produto1.verificarEstoque()}"
+)
+
+print(
+    f"{produto2.nome}: "
+    f"{produto2.verificarEstoque()}"
+)
+
+print(
+    f"{produto3.nome}: "
+    f"{produto3.verificarEstoque()}"
+)
