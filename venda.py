@@ -1,13 +1,26 @@
+
 from item_venda import ItemVenda
 
 
 class Venda:
+
+    # ATRIBUTO DE CLASSE
+    _total_vendas = 0
+
     def __init__(self, id, data, pagamento):
         self.__id = id
         self.__data = data
         self.__pagamento = pagamento
         self.__itens = []
         self.__valor_total = 0.0
+
+        # Incrementa o total de vendas criadas
+        Venda._total_vendas += 1
+
+    # Método estático para consultar o total de vendas
+    @staticmethod
+    def get_total_vendas():
+        return Venda._total_vendas
 
     @property
     def id(self):
@@ -95,7 +108,7 @@ class Venda:
         print("\n========== COMPROVANTE ==========")
         print(f"Venda: {self.__id}")
 
-        # DATA + HORA
+        # DATA E HORA
         print(
             f"Data: "
             f"{self.__data.strftime('%d/%m/%Y %H:%M')}"
