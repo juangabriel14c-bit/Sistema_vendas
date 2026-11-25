@@ -1,3 +1,4 @@
+
 class Produto:
     def __init__(self, id, nome, preco_unitario, descricao, estoque):
         self.__id = id
@@ -13,7 +14,7 @@ class Produto:
     @property
     def nome(self):
         return self.__nome
-                                                                          
+
     @property
     def preco_unitario(self):
         return self.__preco_unitario
@@ -21,6 +22,24 @@ class Produto:
     @property
     def descricao(self):
         return self.__descricao
+
+    def alterar_nome(self, novo_nome):
+        if novo_nome.strip():
+            self.__nome = novo_nome
+            return True
+        return False
+
+    def alterar_preco(self, novo_preco):
+        if novo_preco > 0:
+            self.__preco_unitario = novo_preco
+            return True
+        return False
+
+    def alterar_descricao(self, nova_descricao):
+        if nova_descricao.strip():
+            self.__descricao = nova_descricao
+            return True
+        return False
 
     def decrementar_estoque(self, quantidade):
         if quantidade <= 0:
