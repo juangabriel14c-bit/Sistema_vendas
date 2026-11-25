@@ -1,3 +1,4 @@
+
 from produto import Produto
 from venda import Venda
 from datetime import datetime
@@ -5,6 +6,7 @@ from Pagamento_debito import PagamentoDebito
 from Pagamento_Pix import PagamentoPix
 from Pagamento_Dinheiro import PagamentoDinheiro
 from Pagamento_Cartao import PagamentoCartao
+
 
 # OS PRODUTOS
 
@@ -91,6 +93,16 @@ venda4 = Venda(
 venda4.adicionar_item(produto1, 1)
 
 venda4.finalizar_venda()
+
+
+# VISUALIZAR QUANTIDADE DE VENDAS
+
+print("\n========== CONTROLE DE VENDAS ==========")
+
+print(
+    f"Total de vendas existentes no sistema: "
+    f"{Venda.get_total_vendas()}"
+)
 
 
 # VISUALIZAR O ESTOQUE
